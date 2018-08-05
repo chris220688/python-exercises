@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python "word_ladder.py" $@

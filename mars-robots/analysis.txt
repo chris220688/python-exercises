@@ -1,0 +1,38 @@
+If the robot is deployed in a position A(x,y):
+
+	1. The cost to return to its base (0,0) will always be |x| + |y|
+
+		Example: If a robot is deployed in position (x,y) = (-2,1), the cost to return to the base is |-2| + |1| = 3
+
+
+The first time a robot is deployed, it has the following attributes:
+
+	1. position:			(x,y)
+	1. heading: 			North
+	2. remaining moves: 	20
+	3. cost to base:		|x| + |y|
+
+
+Before any command is executed by the robot, it needs to check:
+
+	1. Current cartesian position								position = (x,y)
+																Indicates which Quadrant of the cartesian system it is positioned:
+																1st Quadrant: (x,y),
+																2nd Quadrant: (-x,y),
+																3rd Quadrant: (-x,-y),
+																4th Quadrant: (x, -y)
+	2. Current facing position 									Starts North, but can become East, South etc
+	3. How many moves it has already executed 					executed_moves
+	3. How many available moves it has left						available_moves = 20 - executed_moves
+	5. The cost to get back 									cost_to_base = |x| + |y|
+	6. The type of the next command 							Is it "move" or "turn"?
+		a. If it is "turn":
+			Call a is_not_risky() function to predict the future
+			heading and how it will affect any upcoming "moves"
+		b. If it is "move", check the risk of executing it:
+			future_position
+			future_available_moves
+			future cost to get back
+
+			If the conditions are satisfied, execute
+			Else return "Should not proceed"
